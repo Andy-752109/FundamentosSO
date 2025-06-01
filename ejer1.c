@@ -12,22 +12,24 @@
 int main(){
     int pid = fork();
 
-    if (pid < 0 ){
+    if (pid < 0 ){ // Verifica si hubo un error al crear el proceso hijo
+        // fork devuelve un valor negativo si hay un error al crear el proceso hijo
         printf("Se ejecuto erroneamente");
         return 1;
-    } else if (pid == 0 ){
-        for(int i = 0; i < 10; i++){
+    } else if (pid == 0 ){ // Proceso hijo
+        // fork devuelve 0 en el proceso hijo
+        for(int i = 0; i < 10; i++){ // Bucle para imprimir "Soy el hijo" 10 veces
             printf("Soy el hijo\n");
-            sleep(1);
+            sleep(1); // Pausa de 1 segundo entre cada impresión
         }
 
-    } else {
+    } else {// Proceso padre
         for ( int i = 0; i < 10; i++)
         {
             printf("Soy el padre\n");
             sleep(1);
         }
-        wait(NULL);
-        printf("Mi proceso hijo ya ha terminado");
+        wait(NULL); // El padre espera a que el hijo termine
+        printf("Mi proceso hijo ya ha terminado"); // Mensaje final del padre
     }
 }
